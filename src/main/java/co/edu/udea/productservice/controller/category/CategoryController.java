@@ -6,6 +6,7 @@ import co.edu.udea.productservice.model.dto.category.CategoryDTO;
 import co.edu.udea.productservice.model.entity.CategoryEntity;
 import co.edu.udea.productservice.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,7 +48,7 @@ public class CategoryController {
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO categoryDTO) {
         CategoryEntity categoryEntity = iCategoryService.createCategory(iCategoryMapper.DTOToModel(categoryDTO));
         CategoryDTO categoryDTODB = iCategoryMapper.modelToDTO(categoryEntity);
-        return ResponseEntity.ok(categoryDTODB);
+        return ResponseEntity.status(HttpStatus.CREATED).body(categoryDTODB);
     }
 
     @PutMapping(value = "/{code}")
@@ -64,7 +65,7 @@ public class CategoryController {
     }
 
     @DeleteMapping(value = "/{code}")
-    public ResponseEntity<CategoryDTO> deleteCategoryById(@PathVariable("code") String code){
+    public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable("code") String code){
         CategoryEntity categoryEntity = iCategoryService.findCategoryByCode(code);
         if (categoryEntity == null){
             ResponseEntity.notFound().build();
