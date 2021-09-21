@@ -2,7 +2,7 @@ package co.edu.udea.productservice.controller.category;
 
 import co.edu.udea.productservice.mapper.category.ICategoryMapper;
 import co.edu.udea.productservice.mapper.category.IListCategoryMapper;
-import co.edu.udea.productservice.model.dto.CategoryDTO;
+import co.edu.udea.productservice.model.dto.category.CategoryDTO;
 import co.edu.udea.productservice.model.entity.CategoryEntity;
 import co.edu.udea.productservice.service.category.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;

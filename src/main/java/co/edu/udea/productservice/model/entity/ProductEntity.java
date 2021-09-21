@@ -50,7 +50,7 @@ public class ProductEntity implements Serializable {
 
     @Column(name = "create_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date create_at;
+    private Date createAt;
 
     private static final long serialVersionUID = 7708595151233242893L;
 

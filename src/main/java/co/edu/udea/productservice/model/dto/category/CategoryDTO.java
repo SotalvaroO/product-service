@@ -1,4 +1,4 @@
-package co.edu.udea.productservice.model.dto;
+package co.edu.udea.productservice.model.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
