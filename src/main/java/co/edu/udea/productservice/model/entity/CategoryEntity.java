@@ -25,7 +25,7 @@ public class CategoryEntity implements Serializable {
     private Long id;
 
     @NotNull(message = "Codigo no debe ser nulo")
-    @Column(name = "code")
+    @Column(name = "code", unique = true)
     private String code;
 
     @NotEmpty(message = "Nombre no debe ser vacío")
