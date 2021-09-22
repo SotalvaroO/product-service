@@ -24,6 +24,8 @@ public class ProductRequestMapperImpl implements IProductRequestMapper {
         productRequestDTO.setDescription(product.getDescription());
         productRequestDTO.setCategory(product.getCategory().getId());
         productRequestDTO.setPrice(product.getPrice());
+        productRequestDTO.setStock(product.getStock());
+        productRequestDTO.setImgReference(product.getImgReference());
         productRequestDTO.setStatus(product.getStatus());
         productRequestDTO.setCreateAt(product.getCreateAt());
 
@@ -45,6 +47,8 @@ public class ProductRequestMapperImpl implements IProductRequestMapper {
             product.setCategory(null);
         }
         product.setPrice(productRequestDTO.getPrice());
+        product.setStock(productRequestDTO.getStock());
+        product.setImgReference(productRequestDTO.getImgReference());
         product.setStatus(productRequestDTO.getStatus());
         product.setCreateAt(productRequestDTO.getCreateAt());
 

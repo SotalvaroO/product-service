@@ -23,6 +23,8 @@ public class ProductResponseMapperImpl implements IProductResponseMapper {
         productResponseDTO.setDescription(product.getDescription());
         productResponseDTO.setCategory(iCategoryMapper.modelToDTO(product.getCategory()));
         productResponseDTO.setPrice(product.getPrice());
+        productResponseDTO.setStock(product.getStock());
+        productResponseDTO.setImgReference(product.getImgReference());
         productResponseDTO.setStatus(product.getStatus());
         productResponseDTO.setCreateAt(product.getCreateAt());
 
@@ -40,6 +42,8 @@ public class ProductResponseMapperImpl implements IProductResponseMapper {
         product.setDescription(productResponseDTO.getDescription());
         product.setCategory(iCategoryMapper.DTOToModel(productResponseDTO.getCategory()));
         product.setPrice(productResponseDTO.getPrice());
+        product.setStock(productResponseDTO.getStock());
+        product.setImgReference(productResponseDTO.getImgReference());
         product.setStatus(productResponseDTO.getStatus());
         product.setCreateAt(productResponseDTO.getCreateAt());
 

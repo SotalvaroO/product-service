@@ -19,16 +19,13 @@ import java.util.Date;
 public class ProductRequestDTO implements Serializable {
 
     private Long id;
-    @NotNull(message = "Codigo no debe ser nulo")
     private String code;
-    @NotEmpty(message = "Nombre no debe ser vacío")
     private String name;
-    @NotEmpty(message = "Descripcion no debe ser vacío")
     private String description;
-    @NotNull(message = "Categoria no debe ser nulo")
     private Long category;
-    @Positive(message = "El precio debe ser mayor que cero")
     private Double price;
+    private Double stock;
+    private String imgReference;
     private String status;
     private Date createAt;
 

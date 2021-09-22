@@ -21,6 +21,8 @@ public class ProductResponseDTO implements Serializable {
     private String description;
     private CategoryDTO category;
     private Double price;
+    private Double stock;
+    private String imgReference;
     private String status;
     private Date createAt;
 

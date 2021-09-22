@@ -53,6 +53,17 @@ public class ProductController {
 
     }
 
+    @GetMapping(value = "/{id}")
+    private ResponseEntity<ProductResponseDTO> findProductById(@PathVariable("id") Long id) {
+        ProductEntity product = iProductService.findProductById(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        ProductResponseDTO productResponseDTO = iProductResponseMapper.modelToDTO(product);
+        return ResponseEntity.ok(productResponseDTO);
+
+    }
+
     @PostMapping
     public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
         ProductEntity productEntity = iProductService.createProduct(iProductRequestMapper.DTOToModel(productRequestDTO));
@@ -60,23 +71,34 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productResponseDTO);
     }
 
-    @PutMapping(value = "/{code}")
-    public ResponseEntity<ProductResponseDTO> updatetProduct(@PathVariable("code") String code, @RequestBody ProductRequestDTO productRequestDTO) {
-        ProductEntity productEntity = iProductService.findProductByCode(code);
+    //Arreglar por id
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable("id") Long id, @RequestBody ProductRequestDTO productRequestDTO) {
+        productRequestDTO.setId(id);
+        ProductEntity productEntity = iProductService.findProductById(id);
         if (productEntity == null) {
             return ResponseEntity.notFound().build();
         }
-        productRequestDTO.setId(productEntity.getId());
         productRequestDTO.setCode(productEntity.getCode());
         ProductEntity productEntityDB = iProductService.updateProduct(iProductRequestMapper.DTOToModel(productRequestDTO));
         return ResponseEntity.ok(iProductResponseMapper.modelToDTO(productEntityDB));
 
     }
 
-    @DeleteMapping(value = "/{code}")
-    public ResponseEntity<ProductResponseDTO> deleteProduct(@PathVariable("code") String code){
-        ProductEntity productEntity = iProductService.findProductByCode(code);
-        if (productEntity == null){
+    @GetMapping(value = "/{id}/stock")
+    public ResponseEntity<ProductResponseDTO> updateStock(@PathVariable("id") Long id, @RequestParam(name = "quantity", required = true) Double stock) {
+        ProductEntity product = iProductService.updateStock(id, stock);
+        if (product == null) {
+            return ResponseEntity.notFound().build();
+        }
+        ProductResponseDTO productResponseDTO = iProductResponseMapper.modelToDTO(product);
+        return ResponseEntity.ok(productResponseDTO);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<ProductResponseDTO> deleteProduct(@PathVariable("id") Long id) {
+        ProductEntity productEntity = iProductService.findProductById(id);
+        if (productEntity == null) {
             ResponseEntity.notFound().build();
         }
         ProductResponseDTO productResponseDTO = iProductResponseMapper.modelToDTO(iProductService.deleteProductById(productEntity.getId()));

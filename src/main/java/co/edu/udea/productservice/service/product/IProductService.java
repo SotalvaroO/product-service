@@ -19,6 +19,9 @@ public interface IProductService {
 
     ProductEntity updateProduct(ProductEntity product);
 
+    ProductEntity updateStock(Long id, Double quantity);
+
     ProductEntity deleteProductById(Long id);
+
 
 }

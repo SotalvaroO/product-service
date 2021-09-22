@@ -25,7 +25,6 @@ public class ProductEntity implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @NotNull(message = "Codigo no debe ser nulo")
     @Column(name = "code", unique = true)
     private String code;
 
@@ -44,6 +43,13 @@ public class ProductEntity implements Serializable {
     @Positive(message = "El precio debe ser mayor que cero")
     @Column(name = "price")
     private Double price;
+
+    @Positive(message = "El stock debe ser mayor que cero")
+    @Column(name = "stock")
+    private Double stock;
+
+    @Column(name = "img_reference")
+    private String imgReference;
 
     @Column(name = "status")
     private String status;

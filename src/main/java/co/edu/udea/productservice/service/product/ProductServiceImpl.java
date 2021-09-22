@@ -53,18 +53,31 @@ public class ProductServiceImpl implements IProductService {
         if (productEntity == null) {
             return null;
         }
+        productEntity.setCode(product.getCode());
         productEntity.setName(product.getName());
         productEntity.setDescription(product.getDescription());
         productEntity.setCategory(product.getCategory());
         productEntity.setPrice(product.getPrice());
+        productEntity.setImgReference(product.getImgReference());
 
         return iProductRepository.save(productEntity);
     }
 
     @Override
+    public ProductEntity updateStock(Long id, Double quantity) {
+        ProductEntity product = findProductById(id);
+        if (product == null) {
+            return null;
+        }
+        Double stock = product.getStock() + quantity;
+        product.setStock(stock);
+        return iProductRepository.save(product);
+    }
+
+    @Override
     public ProductEntity deleteProductById(Long id) {
         ProductEntity productEntity = findProductById(id);
-        if (productEntity == null){
+        if (productEntity == null) {
             return null;
         }
         productEntity.setStatus("DELETED");
