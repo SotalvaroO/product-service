@@ -1,8 +1,15 @@
 
 server:
-  port: 8001
+  port: ${PORT:0}
   error:
     include-stacktrace: never #Evita que muestre el trace en el response
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 # To See H2 Console in Browser:
 # http://localhost:8001/h2-console

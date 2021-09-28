@@ -33,17 +33,17 @@ public class ProductController {
     private IListProductResponseMapper iListProductResponseMapper;
 
     @GetMapping
-    ResponseEntity<List<ProductResponseDTO>> listProductByCategory(@RequestParam(name = "categoryCode", required = false) String categoryCode) {
+    ResponseEntity<List<ProductResponseDTO>> listProductByCategory(@RequestParam(name = "categoryId", required = false) Long categoryId) {
 
         List<ProductEntity> products = new ArrayList<>();
-        if (categoryCode == null) {
+        if (categoryId == null) {
             products = iProductService.listAllProduct();
 
             if (products.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
         } else {
-            products = iProductService.listByProductCategory(iCategoryService.findCategoryByCode(categoryCode));
+            products = iProductService.listByProductCategory(iCategoryService.findCategoryById(categoryId));
             if (products.isEmpty()) {
                 return ResponseEntity.notFound().build();
             }
