@@ -1,8 +1,10 @@
 
 server:
   port: ${PORT:0}
+#  port: 8070
   error:
     include-stacktrace: never #Evita que muestre el trace en el response
+
 
 eureka:
   client:
@@ -24,12 +26,13 @@ spring:
   # DB
   # ===============================
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    driverClassName: org.h2.Driver
-    #driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    platform: h2
-    username: sa
-    password:
+#    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:sqlserver://product-service-so.database.windows.net:1433;database=product-service;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+#    driverClassName: org.h2.Driver
+    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    #platform: h2
+    username: sotalvaroo@product-service-so
+    password: Pija1234
 
   # ===============================
   # JPA / HIBERNATE
@@ -38,8 +41,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.H2Dialect
-    #database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    #database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
     properties:
       hibernate:
         show_sql: true
@@ -49,3 +52,8 @@ spring:
 ##logging:
 ##  pattern:
 ##    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+springdoc:
+  api-docs:
+    path: /api/product/api-docs
+  swagger-ui:
+    path: /api/product/swagger-ui.html

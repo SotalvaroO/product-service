@@ -35,9 +35,9 @@ public class CategoryController {
 
     }
 
-    @GetMapping(value = "/{code}")
-    public ResponseEntity<CategoryDTO> findCategoryByCode(@PathVariable("code") String code){
-        CategoryEntity categoryEntity = iCategoryService.findCategoryByCode(code);
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> findCategoryByCode(@PathVariable("id") Long id){
+        CategoryEntity categoryEntity = iCategoryService.findCategoryById(id);
         if (categoryEntity == null){
             return ResponseEntity.notFound().build();
         }
@@ -51,9 +51,9 @@ public class CategoryController {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryDTODB);
     }
 
-    @PutMapping(value = "/{code}")
-    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable("code") String code, @RequestBody CategoryDTO categoryDTO){
-        CategoryEntity categoryEntity = iCategoryService.findCategoryByCode(code);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> updateCategory(@PathVariable("id") Long id, @RequestBody CategoryDTO categoryDTO){
+        CategoryEntity categoryEntity = iCategoryService.findCategoryById(id);
         if (categoryEntity == null){
             return ResponseEntity.notFound().build();
         }
@@ -64,13 +64,13 @@ public class CategoryController {
 
     }
 
-    @DeleteMapping(value = "/{code}")
-    public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable("code") String code){
-        CategoryEntity categoryEntity = iCategoryService.findCategoryByCode(code);
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<CategoryDTO> deleteCategory(@PathVariable("id") Long id){
+        CategoryEntity categoryEntity = iCategoryService.findCategoryById(id);
         if (categoryEntity == null){
             ResponseEntity.notFound().build();
         }
-        CategoryDTO categoryDTO = iCategoryMapper.modelToDTO(iCategoryService.deleteCategoryById(categoryEntity.getId()));
+        CategoryDTO categoryDTO = iCategoryMapper.modelToDTO(iCategoryService.deleteCategoryById(id));
         return ResponseEntity.ok(categoryDTO);
     }
 
